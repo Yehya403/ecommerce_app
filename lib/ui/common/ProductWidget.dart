@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../domain/model/Product.dart';
 
@@ -11,7 +12,8 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
+      width: 191.w,
+      height: 237.h,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.0),
@@ -27,8 +29,8 @@ class ProductWidget extends StatelessWidget {
               child: CachedNetworkImage(
                 imageBuilder: (context, imageProvider) {
                   return Container(
-                    width: 250,
-                    height: 128,
+                    width: 191.w,
+                    height: 128.h,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: imageProvider, fit: BoxFit.fill)),
@@ -38,8 +40,8 @@ class ProductWidget extends StatelessWidget {
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
-                width: 250,
-                height: 128,
+                width: 191.w,
+                height: 128.h,
               ),
             ),
             Text(

@@ -12,22 +12,23 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../data/api_manager.dart' as _i3;
+import '../data/dataSourceContract/ProductsDataSource.dart' as _i15;
 import '../data/dataSourceContract/brands_data_source.dart' as _i4;
 import '../data/dataSourceContract/categories_data_source.dart' as _i8;
-import '../data/dataSourceContract/ProductsDataSource.dart' as _i14;
 import '../data/dataSourceImpl/BrandsOnlineDataSource.dart' as _i5;
 import '../data/dataSourceImpl/CategoriesOnlineDataSourceImpl.dart' as _i9;
-import '../data/dataSourceImpl/ProductsOnlineDataSourceImpl.dart' as _i15;
+import '../data/dataSourceImpl/ProductsOnlineDataSourceImpl.dart' as _i16;
 import '../data/repositoryImpl/BrandsRepoImpl.dart' as _i7;
 import '../data/repositoryImpl/CategoriesRepositoryImpl.dart' as _i11;
-import '../data/repositoryImpl/ProductsRepoImpl.dart' as _i17;
+import '../data/repositoryImpl/ProductsRepoImpl.dart' as _i18;
 import '../domain/repository_contract/BrandsRepo.dart' as _i6;
 import '../domain/repository_contract/CategoriesRepository.dart' as _i10;
-import '../domain/repository_contract/ProductsRepo.dart' as _i16;
+import '../domain/repository_contract/ProductsRepo.dart' as _i17;
+import '../domain/usecase/GetMostSellingProducts.dart' as _i19;
 import '../domain/usecase/get_brands_usecase.dart' as _i12;
 import '../domain/usecase/get_categories_usecase.dart' as _i13;
-import '../domain/usecase/GetMostSellingProducts.dart' as _i18;
-import '../ui/home/home_tab/home_tab_view_model.dart' as _i19;
+import '../ui/home/home_screen_view_model.dart' as _i14;
+import '../ui/home/home_tab/home_tab_view_model.dart' as _i20;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -53,16 +54,17 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i12.GetBrandsUsecase(gh<_i6.BrandsRepo>()));
     gh.factory<_i13.GetCategoriesUsecase>(
         () => _i13.GetCategoriesUsecase(gh<_i10.CategoriesRepository>()));
-    gh.factory<_i14.ProductsDataSource>(
-        () => _i15.ProductsOnlineDataSourceImpl(gh<_i3.ApiManager>()));
-    gh.factory<_i16.ProductsRepo>(
-        () => _i17.ProductsRepoImpl(gh<_i14.ProductsDataSource>()));
-    gh.factory<_i18.GetMostSellingProducts>(
-        () => _i18.GetMostSellingProducts(gh<_i16.ProductsRepo>()));
-    gh.factory<_i19.HomeTabViewModel>(() => _i19.HomeTabViewModel(
+    gh.factory<_i14.HomeViewModel>(() => _i14.HomeViewModel());
+    gh.factory<_i15.ProductsDataSource>(
+        () => _i16.ProductsOnlineDataSourceImpl(gh<_i3.ApiManager>()));
+    gh.factory<_i17.ProductsRepo>(
+        () => _i18.ProductsRepoImpl(gh<_i15.ProductsDataSource>()));
+    gh.factory<_i19.GetMostSellingProducts>(
+        () => _i19.GetMostSellingProducts(gh<_i17.ProductsRepo>()));
+    gh.factory<_i20.HomeTabViewModel>(() => _i20.HomeTabViewModel(
           gh<_i13.GetCategoriesUsecase>(),
           gh<_i12.GetBrandsUsecase>(),
-          gh<_i18.GetMostSellingProducts>(),
+          gh<_i19.GetMostSellingProducts>(),
         ));
     return this;
   }
