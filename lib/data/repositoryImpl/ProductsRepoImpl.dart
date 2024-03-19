@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+
 import '../../domain/model/Product.dart';
 import '../../domain/repository_contract/ProductsRepo.dart';
 import '../dataSourceContract/ProductsDataSource.dart';
@@ -11,7 +12,8 @@ class ProductsRepoImpl extends ProductsRepo {
   ProductsRepoImpl(this.productsOnlineDataSource);
 
   @override
-  Future<List<Product>?> getProducts({ProductSort? sort}) {
-    return productsOnlineDataSource.getProducts(sort: sort);
+  Future<List<Product>?> getProducts({ProductSort? sort, String? categoryId}) {
+    return productsOnlineDataSource.getProducts(
+        sort: sort, categoryId: categoryId);
   }
 }

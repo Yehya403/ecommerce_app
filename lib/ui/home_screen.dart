@@ -39,10 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
               bodyWidget = const HomeTab();
             case CategoriesTabState():
               selectedIndex = 1;
-              bodyWidget = const WishlistTab();
+              bodyWidget = const CategoriesTab();
             case WishlistTabState():
               selectedIndex = 2;
-              bodyWidget = const CategoriesTab();
+              bodyWidget = const WishlistTab();
             case ProfileTabState():
               selectedIndex = 3;
               bodyWidget = const ProfileTab();
