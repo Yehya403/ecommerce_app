@@ -4,9 +4,9 @@ import 'package:ecommerce_app/ui/home/wishlist_tab/wishlist_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../di/di.dart';
-import 'home/home_screen_view_model.dart';
-import 'home/home_tab/home_tab.dart';
+import '../../di/di.dart';
+import 'home_screen_view_model.dart';
+import 'home_tab/home_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
