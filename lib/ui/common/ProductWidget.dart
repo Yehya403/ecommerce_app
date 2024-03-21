@@ -73,7 +73,6 @@ class ProductWidget extends StatelessWidget {
                   Text('Reviews: (${product.ratingsAverage ?? 0})'),
                   const Icon(Icons.star, color: Colors.orange),
                   Container(
-                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Theme.of(context).primaryColor),
