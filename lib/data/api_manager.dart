@@ -8,9 +8,6 @@ import 'package:ecommerce_app/data/model/registerRequest/RegisterRequest.dart';
 import 'package:ecommerce_app/data/model/registerResponse/RegisterResponse.dart';
 import 'package:ecommerce_app/domain/failures.dart';
 import 'package:http_interceptor/http_interceptor.dart';
-
-import 'package:ecommerce_app/data/LoggingInterceptor.dart';
-import 'package:http_interceptor/http_interceptor.dart';
 import 'package:injectable/injectable.dart';
 
 import '../domain/repository_contract/ProductsRepo.dart';
@@ -118,23 +115,5 @@ class ApiManager {
       return Left(
           NetworkError(errorMessage: 'Please check your internet connection'));
     }
-  }
-  Future<ProductsResponse> getProducts(
-      {ProductSort? sort, String? categoryId}) async {
-    var params = {};
-    if (sort != null) {
-      params['sort'] = sort.value;
-    }
-    if (categoryId != null) {
-      params['category[in]'] = categoryId;
-    }
-    var url = Uri.https(
-      baseUrl,
-      'api/v1/products',
-    );
-    var response = await client.get(url);
-    var json = jsonDecode(response.body);
-    var productsResponse = ProductsResponse.fromJson(json);
-    return productsResponse;
   }
 }
