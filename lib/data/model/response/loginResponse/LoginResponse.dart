@@ -1,4 +1,4 @@
-import '../../../domain/model/AuthResult.dart';
+import '../../../../domain/model/AuthResult.dart';
 import '../registerResponse/UserDto.dart';
 
 class LoginResponse {

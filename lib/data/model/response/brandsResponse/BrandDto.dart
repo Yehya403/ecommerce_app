@@ -1,4 +1,4 @@
-import '../../../domain/model/Brand.dart';
+import '../../../../domain/model/Brand.dart';
 
 /// _id : "64089fe824b25627a25315d1"
 /// name : "Canon"
@@ -9,12 +9,13 @@ import '../../../domain/model/Brand.dart';
 
 class BrandDto {
   BrandDto({
-      this.id, 
-      this.name, 
-      this.slug, 
-      this.image, 
-      this.createdAt, 
-      this.updatedAt,});
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   BrandDto.fromJson(dynamic json) {
     id = json['_id'];
@@ -24,25 +25,31 @@ class BrandDto {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
+
   String? id;
   String? name;
   String? slug;
   String? image;
   String? createdAt;
   String? updatedAt;
-BrandDto copyWith({  String? id,
-  String? name,
-  String? slug,
-  String? image,
-  String? createdAt,
-  String? updatedAt,
-}) => BrandDto(  id: id ?? this.id,
-  name: name ?? this.name,
-  slug: slug ?? this.slug,
-  image: image ?? this.image,
-  createdAt: createdAt ?? this.createdAt,
-  updatedAt: updatedAt ?? this.updatedAt,
-);
+
+  BrandDto copyWith({
+    String? id,
+    String? name,
+    String? slug,
+    String? image,
+    String? createdAt,
+    String? updatedAt,
+  }) =>
+      BrandDto(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        slug: slug ?? this.slug,
+        image: image ?? this.image,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = id;
@@ -54,7 +61,7 @@ BrandDto copyWith({  String? id,
     return map;
   }
 
-  Brand toBrand(){
+  Brand toBrand() {
     return Brand(
       id: id,
       name: name,

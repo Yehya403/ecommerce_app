@@ -1,4 +1,4 @@
-import '../../../domain/model/Product.dart';
+import '../../../../domain/model/Product.dart';
 import '../brandsResponse/BrandDto.dart';
 import '../categoryResponse/CategoryDto.dart';
 import 'SubcategoryDto.dart';

@@ -1,4 +1,4 @@
-import '../../../domain/model/Category.dart';
+import '../../../../domain/model/Category.dart';
 
 /// _id : "6439d61c0049ad0b52b90051"
 /// name : "Music"
@@ -9,12 +9,13 @@ import '../../../domain/model/Category.dart';
 
 class CategoryDto {
   CategoryDto({
-      this.id, 
-      this.name, 
-      this.slug, 
-      this.image, 
-      this.createdAt, 
-      this.updatedAt,});
+    this.id,
+    this.name,
+    this.slug,
+    this.image,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   CategoryDto.fromJson(dynamic json) {
     id = json['_id'];
@@ -24,25 +25,31 @@ class CategoryDto {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }
+
   String? id;
   String? name;
   String? slug;
   String? image;
   String? createdAt;
   String? updatedAt;
-CategoryDto copyWith({  String? id,
-  String? name,
-  String? slug,
-  String? image,
-  String? createdAt,
-  String? updatedAt,
-}) => CategoryDto(  id: id ?? this.id,
-  name: name ?? this.name,
-  slug: slug ?? this.slug,
-  image: image ?? this.image,
-  createdAt: createdAt ?? this.createdAt,
-  updatedAt: updatedAt ?? this.updatedAt,
-);
+
+  CategoryDto copyWith({
+    String? id,
+    String? name,
+    String? slug,
+    String? image,
+    String? createdAt,
+    String? updatedAt,
+  }) =>
+      CategoryDto(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        slug: slug ?? this.slug,
+        image: image ?? this.image,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = id;
@@ -54,13 +61,12 @@ CategoryDto copyWith({  String? id,
     return map;
   }
 
-  Category toCategory(){
+  Category toCategory() {
     return Category(
       id: id,
       name: name,
       slug: slug,
       image: image,
-
     );
   }
 }

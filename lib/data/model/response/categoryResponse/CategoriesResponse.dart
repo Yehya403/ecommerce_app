@@ -1,4 +1,4 @@
-import '../PaginationDto.dart';
+import '../../PaginationDto.dart';
 import 'CategoryDto.dart';
 
 /// results : 10
@@ -7,13 +7,16 @@ import 'CategoryDto.dart';
 
 class CategoriesResponse {
   CategoriesResponse({
-      this.results, 
-      this.metadata, 
-      this.data,});
+    this.results,
+    this.metadata,
+    this.data,
+  });
 
   CategoriesResponse.fromJson(dynamic json) {
     results = json['results'];
-    metadata = json['metadata'] != null ? PaginationDto.fromJson(json['metadata']) : null;
+    metadata = json['metadata'] != null
+        ? PaginationDto.fromJson(json['metadata'])
+        : null;
     if (json['data'] != null) {
       data = [];
       json['data'].forEach((v) {
@@ -21,16 +24,22 @@ class CategoriesResponse {
       });
     }
   }
+
   int? results;
   PaginationDto? metadata;
   List<CategoryDto>? data;
-CategoriesResponse copyWith({  int? results,
-  PaginationDto? metadata,
-  List<CategoryDto>? data,
-}) => CategoriesResponse(  results: results ?? this.results,
-  metadata: metadata ?? this.metadata,
-  data: data ?? this.data,
-);
+
+  CategoriesResponse copyWith({
+    int? results,
+    PaginationDto? metadata,
+    List<CategoryDto>? data,
+  }) =>
+      CategoriesResponse(
+        results: results ?? this.results,
+        metadata: metadata ?? this.metadata,
+        data: data ?? this.data,
+      );
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['results'] = results;
@@ -42,5 +51,4 @@ CategoriesResponse copyWith({  int? results,
     }
     return map;
   }
-
 }
