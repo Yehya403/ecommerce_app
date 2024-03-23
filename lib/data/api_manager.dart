@@ -2,15 +2,17 @@ import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce_app/data/LoggingInterceptor.dart';
 import 'package:ecommerce_app/data/api_constants.dart';
 import 'package:ecommerce_app/data/model/registerRequest/RegisterRequest.dart';
 import 'package:ecommerce_app/data/model/registerResponse/RegisterResponse.dart';
 import 'package:ecommerce_app/domain/failures.dart';
-import 'package:http_interceptor/http_interceptor.dart';
+import 'package:http/http.dart';
+import 'package:http_interceptor/http/intercepted_client.dart';
 import 'package:injectable/injectable.dart';
 
 import '../domain/repository_contract/ProductsRepo.dart';
+import '../ui/utils/shared_preference_utils.dart';
+import 'LoggingInterceptor.dart';
 import 'model/brandsResponse/BrandsResponse.dart';
 import 'model/categoryResponse/CategoriesResponse.dart';
 import 'model/loginRequest/LoginRequest.dart';
@@ -107,6 +109,8 @@ class ApiManager {
 
       var loginResponse = LoginResponse.fromJson(jsonDecode(response.body));
       if (response.statusCode >= 200 && response.statusCode < 300) {
+        SharedPreferenceUtils.saveData(
+            key: 'token', value: loginResponse.token);
         return Right(loginResponse);
       } else {
         return Left(ServerError(errorMessage: loginResponse.message));

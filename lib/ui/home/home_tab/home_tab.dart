@@ -41,11 +41,7 @@ class _HomeTabState extends State<HomeTab> {
           return buildSuccessWidget(state.categories ?? [], state.brands ?? [],
               state.mostSellingProducts ?? [], context);
         }
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Default'),
-          ),
-        );
+        return const Center(child: CircularProgressIndicator());
       },
       listener: (BuildContext context, Object? state) {
         if (state is Loading) {
@@ -62,9 +58,6 @@ class _HomeTabState extends State<HomeTab> {
 Widget buildSuccessWidget(List<Category> categories, List<Brand> brands,
     List<Product> mostSellingProducts, BuildContext context) {
   return Scaffold(
-    appBar: AppBar(
-      title: const Text('Home'),
-    ),
     body: Padding(
       padding: const EdgeInsets.all(16.0),
       child: CustomScrollView(

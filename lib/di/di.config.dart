@@ -39,6 +39,7 @@ import '../ui/auth/register/cubit/register_view_model.dart' as _i26;
 import '../ui/home/categories_tab/categories_view_model.dart' as _i27;
 import '../ui/home/home_screen_view_model.dart' as _i18;
 import '../ui/home/home_tab/home_tab_view_model.dart' as _i30;
+import '../ui/products_catalog/catalog_view_model.dart' as _i31;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -92,6 +93,8 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i16.GetBrandsUsecase>(),
           gh<_i28.GetMostSellingProducts>(),
         ));
+    gh.factory<_i31.CatalogViewModel>(
+        () => _i31.CatalogViewModel(gh<_i29.GetProductsUseCase>()));
     return this;
   }
 }

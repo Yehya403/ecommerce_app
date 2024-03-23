@@ -2,6 +2,7 @@ class ApiConstants {
 //https://ecommerce.routemisr.com/api/v1/categories
 //https://ecommerce.routemisr.com/api/v1/brands
 //https://ecommerce.routemisr.com/api/v1/products
+//https://ecommerce.routemisr.com/api/v1/cart
 //https://ecommerce.routemisr.com/api/v1/auth/signup
 //https://ecommerce.routemisr.com/api/v1/auth/signin
 

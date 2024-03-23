@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../di/di.dart';
 import '../../domain/model/Category.dart';
 import '../common/ProductWidget.dart';
+import '../common/custom_search_app_bar.dart';
 import 'catalog_view_model.dart';
 
 class ProductsCatalog extends StatefulWidget {
@@ -23,6 +24,9 @@ class _ProductsCatalogState extends State<ProductsCatalog> {
     var category = ModalRoute.of(context)?.settings.arguments as Category?;
     viewModel.loadProducts(category: category);
     return Scaffold(
+      appBar: AppBar(
+        title: const CustomSearchAppBar(),
+      ),
       body: BlocBuilder<CatalogViewModel, CatalogState>(
         bloc: viewModel,
         builder: (context, state) {
@@ -31,7 +35,8 @@ class _ProductsCatalogState extends State<ProductsCatalog> {
               return const Center(child: CircularProgressIndicator());
             case SuccessState():
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       childAspectRatio: 8 / 10,

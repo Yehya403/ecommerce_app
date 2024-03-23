@@ -36,7 +36,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         } else if (state is RegisterSuccessState) {
           DialogUtils.hideLoading(context);
           DialogUtils.showMessage(context, 'Register Successfully',
-              title: 'Success', posActionName: 'ok');
+              title: 'Success', posActionName: 'ok', posAction: () {
+            Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+          });
         }
       },
       child: Scaffold(
