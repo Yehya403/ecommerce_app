@@ -5,6 +5,8 @@ import '../../di/di.dart';
 import '../../domain/model/Category.dart';
 import '../common/ProductWidget.dart';
 import 'catalog_states.dart';
+import '../common/custom_search_app_bar.dart';
+
 import 'catalog_view_model.dart';
 
 class ProductsCatalog extends StatefulWidget {

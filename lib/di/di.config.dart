@@ -46,6 +46,7 @@ import '../ui/home/home_screen_view_model.dart' as _i18;
 import '../ui/home/home_tab/home_tab_view_model.dart' as _i35;
 import '../ui/products_catalog/catalog_view_model.dart' as _i36;
 
+
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
   _i1.GetIt init({
@@ -108,6 +109,8 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i34.GetProductsUseCase>(),
           gh<_i31.AddToCartUseCase>(),
         ));
+    gh.factory<_i31.CatalogViewModel>(
+        () => _i31.CatalogViewModel(gh<_i29.GetProductsUseCase>()));
     return this;
   }
 }
