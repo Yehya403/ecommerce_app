@@ -1,4 +1,4 @@
-import '../../../domain/model/User.dart';
+import '../../../../domain/model/User.dart';
 
 /// name : "test1"
 /// email : "test223@gmail.com"

@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/data/api_constants.dart';
-import 'package:ecommerce_app/data/model/registerRequest/RegisterRequest.dart';
-import 'package:ecommerce_app/data/model/registerResponse/RegisterResponse.dart';
+import 'package:ecommerce_app/data/model/response/cartResponse/AddToCartResponseDto.dart';
 import 'package:ecommerce_app/domain/failures.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http/intercepted_client.dart';
@@ -13,11 +12,13 @@ import 'package:injectable/injectable.dart';
 import '../domain/repository_contract/ProductsRepo.dart';
 import '../ui/utils/shared_preference_utils.dart';
 import 'LoggingInterceptor.dart';
-import 'model/brandsResponse/BrandsResponse.dart';
-import 'model/categoryResponse/CategoriesResponse.dart';
-import 'model/loginRequest/LoginRequest.dart';
-import 'model/loginResponse/LoginResponse.dart';
-import 'model/productsResponse/ProductsResponse.dart';
+import 'model/request/loginRequest/LoginRequest.dart';
+import 'model/request/registerRequest/RegisterRequest.dart';
+import 'model/response/brandsResponse/BrandsResponse.dart';
+import 'model/response/categoryResponse/CategoriesResponse.dart';
+import 'model/response/loginResponse/LoginResponse.dart';
+import 'model/response/productsResponse/ProductsResponse.dart';
+import 'model/response/registerResponse/RegisterResponse.dart';
 
 @singleton
 @injectable
@@ -49,7 +50,7 @@ class ApiManager {
       params['sort'] = sort.value;
     }
     if (categoryId != null) {
-      params['category[in]'] = categoryId;
+      params['category'] = categoryId;
     }
     var url = Uri.https(
       ApiConstants.baseUrl,
@@ -100,6 +101,7 @@ class ApiManager {
         await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
+      // I am connected to a mobile network or wifi.
       var loginBody = LoginRequest(
         email: email,
         password: password,
@@ -114,6 +116,32 @@ class ApiManager {
         return Right(loginResponse);
       } else {
         return Left(ServerError(errorMessage: loginResponse.message));
+      }
+    } else {
+      return Left(
+          NetworkError(errorMessage: 'Please check your internet connection'));
+    }
+  }
+
+  Future<Either<Failures, AddToCartResponseDto>> addToCart(
+      {required String productId}) async {
+    Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.addToCartApi);
+    final ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      var token = SharedPreferenceUtils.getData(key: 'token');
+      // I am connected to a mobile network or wifi.
+      var response = await client.post(url,
+          body: {'productId': productId}, headers: {'token': token.toString()});
+      var addToCartResponse =
+          AddToCartResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(addToCartResponse);
+      } else if (response.statusCode == 401) {
+        return Left(ServerError(errorMessage: addToCartResponse.message));
+      } else {
+        return Left(ServerError(errorMessage: addToCartResponse.message));
       }
     } else {
       return Left(

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/ui/products_catalog/catalog_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -73,13 +74,21 @@ class ProductWidget extends StatelessWidget {
                   Text('Reviews: (${product.ratingsAverage ?? 0})'),
                   const Icon(Icons.star, color: Colors.orange),
                   Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Theme.of(context).primaryColor),
-                      child: const Icon(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).primaryColor),
+                    child: IconButton(
+                      onPressed: () {
+                        CatalogViewModel.get(context)
+                            .addToCart(productId: product.id ?? "");
+                      },
+                      icon: Icon(
                         Icons.add,
+                        size: 24.sp,
                         color: Colors.white,
-                      )),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             )

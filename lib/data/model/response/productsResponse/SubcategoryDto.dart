@@ -1,4 +1,4 @@
-import '../../../domain/model/Subcategory.dart';
+import '../../../../domain/model/Subcategory.dart';
 
 /// _id : "6407f1bcb575d3b90bf95797"
 /// name : "Women's Clothing"
@@ -7,10 +7,11 @@ import '../../../domain/model/Subcategory.dart';
 
 class SubcategoryDto {
   SubcategoryDto({
-      this.id, 
-      this.name, 
-      this.slug, 
-      this.category,});
+    this.id,
+    this.name,
+    this.slug,
+    this.category,
+  });
 
   SubcategoryDto.fromJson(dynamic json) {
     id = json['_id'];
@@ -18,19 +19,25 @@ class SubcategoryDto {
     slug = json['slug'];
     category = json['category'];
   }
+
   String? id;
   String? name;
   String? slug;
   String? category;
-SubcategoryDto copyWith({  String? id,
-  String? name,
-  String? slug,
-  String? category,
-}) => SubcategoryDto(  id: id ?? this.id,
-  name: name ?? this.name,
-  slug: slug ?? this.slug,
-  category: category ?? this.category,
-);
+
+  SubcategoryDto copyWith({
+    String? id,
+    String? name,
+    String? slug,
+    String? category,
+  }) =>
+      SubcategoryDto(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        slug: slug ?? this.slug,
+        category: category ?? this.category,
+      );
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = id;

@@ -10,7 +10,7 @@ import 'home_screen_view_model.dart';
 import 'home_tab/home_tab.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   static const String routeName = 'HomeSc';
 
@@ -32,80 +32,85 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-        bloc: viewModel,
-        builder: (context, state) {
-          switch (state) {
-            case HomeTabState():
-              selectedIndex = 0;
-              bodyWidget = const HomeTab();
-            case CategoriesTabState():
-              selectedIndex = 1;
-              bodyWidget = const CategoriesTab();
-            case WishlistTabState():
-              selectedIndex = 2;
-              bodyWidget = const WishlistTab();
-            case ProfileTabState():
-              selectedIndex = 3;
-              bodyWidget = const ProfileTab();
-          }
-          return Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              backgroundColor: Colors.white,
-              title: const CustomSearchAppBar(),
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: selectedIndex,
-              onTap: (index) {
-                setState(() {
-                  viewModel.onTabClick(index);
-                });
-              },
-              items: [
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  icon: selectedIndex == 0
-                      ? const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.home),
-                        )
-                      : const Icon(Icons.home_outlined),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  icon: selectedIndex == 1
-                      ? const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.category),
-                        )
-                      : const Icon(Icons.category_outlined),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  icon: selectedIndex == 2
-                      ? const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.favorite),
-                        )
-                      : const Icon(Icons.favorite_outline),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).primaryColor,
-                  icon: selectedIndex == 3
-                      ? const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.person),
-                        )
-                      : const Icon(Icons.person_outline),
-                  label: '',
-                ),
-              ],
-            ),
-            body: bodyWidget,
-          );
-        });
+      bloc: viewModel,
+      builder: (context, state) {
+        switch (state) {
+          case HomeTabState():
+            selectedIndex = 0;
+            bodyWidget = const HomeTab();
+            break; // Add break statements to prevent fall-through
+          case CategoriesTabState():
+            selectedIndex = 1;
+            bodyWidget = const CategoriesTab();
+            break;
+          case WishlistTabState():
+            selectedIndex = 2;
+            bodyWidget = const WishlistTab();
+            break;
+          case ProfileTabState():
+            selectedIndex = 3;
+            bodyWidget = const ProfileTab();
+            break;
+        }
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            title: CustomSearchAppBar(),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: selectedIndex,
+            onTap: (index) {
+              setState(() {
+                viewModel.onTabClick(index);
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
+                backgroundColor: Theme.of(context).primaryColor,
+                icon: selectedIndex == 0
+                    ? const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.home),
+                      )
+                    : const Icon(Icons.home_outlined),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                backgroundColor: Theme.of(context).primaryColor,
+                icon: selectedIndex == 1
+                    ? const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.category),
+                      )
+                    : const Icon(Icons.category_outlined),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                backgroundColor: Theme.of(context).primaryColor,
+                icon: selectedIndex == 2
+                    ? const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.favorite),
+                      )
+                    : const Icon(Icons.favorite_outline),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                backgroundColor: Theme.of(context).primaryColor,
+                icon: selectedIndex == 3
+                    ? const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.person),
+                      )
+                    : const Icon(Icons.person_outline),
+                label: '',
+              ),
+            ],
+          ),
+          body: bodyWidget,
+        );
+      },
+    );
   }
 }
