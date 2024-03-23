@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../di/di.dart';
+import '../common/custom_search_app_bar.dart';
 import 'home_screen_view_model.dart';
 import 'home_tab/home_tab.dart';
 
@@ -48,6 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
               bodyWidget = const ProfileTab();
           }
           return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.white,
+              title: const CustomSearchAppBar(),
+            ),
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: selectedIndex,
               onTap: (index) {
@@ -71,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: selectedIndex == 1
                       ? const CircleAvatar(
                           backgroundColor: Colors.white,
-                          child: Icon(Icons.category_outlined),
+                          child: Icon(Icons.category),
                         )
                       : const Icon(Icons.category_outlined),
                   label: '',
@@ -81,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: selectedIndex == 2
                       ? const CircleAvatar(
                           backgroundColor: Colors.white,
-                          child: Icon(Icons.favorite_outline),
+                          child: Icon(Icons.favorite),
                         )
                       : const Icon(Icons.favorite_outline),
                   label: '',
@@ -91,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: selectedIndex == 3
                       ? const CircleAvatar(
                           backgroundColor: Colors.white,
-                          child: Icon(Icons.person_outline),
+                          child: Icon(Icons.person),
                         )
                       : const Icon(Icons.person_outline),
                   label: '',
