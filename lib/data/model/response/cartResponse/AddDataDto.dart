@@ -1,4 +1,5 @@
-import 'Products.dart';
+import '../../../../domain/model/AddData.dart';
+import 'AddProductDto.dart';
 
 /// _id : "65fe7c82be8b52323583f1b0"
 /// cartOwner : "65fe6ff1be8b52323583e92b"
@@ -8,23 +9,24 @@ import 'Products.dart';
 /// __v : 0
 /// totalCartPrice : 160
 
-class Data {
-  Data({
-      this.id, 
-      this.cartOwner, 
-      this.products, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v, 
-      this.totalCartPrice,});
+class AddDataDto {
+  AddDataDto({
+    this.id,
+    this.cartOwner,
+    this.products,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.totalCartPrice,
+  });
 
-  Data.fromJson(dynamic json) {
+  AddDataDto.fromJson(dynamic json) {
     id = json['_id'];
     cartOwner = json['cartOwner'];
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
-        products?.add(Products.fromJson(v));
+        products?.add(AddProductDto.fromJson(v));
       });
     }
     createdAt = json['createdAt'];
@@ -32,9 +34,10 @@ class Data {
     v = json['__v'];
     totalCartPrice = json['totalCartPrice'];
   }
+
   String? id;
   String? cartOwner;
-  List<Products>? products;
+  List<AddProductDto>? products;
   String? createdAt;
   String? updatedAt;
   num? v;
@@ -54,4 +57,15 @@ class Data {
     return map;
   }
 
+  AddData toAddData() {
+    return AddData(
+      id: id,
+      cartOwner: cartOwner,
+      products: products?.map((e) => e.toAddProduct()).toList(),
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      v: v,
+      totalCartPrice: totalCartPrice,
+    );
+  }
 }
