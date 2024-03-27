@@ -32,7 +32,7 @@ class _CategoriesTabState extends State<CategoriesTab> {
           case SuccessState():
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4),
+                  crossAxisCount: 3),
               itemBuilder: (context, index) {
                 return CategoryWidget(category: state.categories![index]);
               },

@@ -6,15 +6,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../domain/model/Product.dart';
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget(this.product, {super.key});
-
   final Product product;
+  final bool isAddedEnabled;
+
+  const ProductWidget(
+      {super.key, required this.product, this.isAddedEnabled = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 191.w,
       height: 237.h,
+      width: 191.w,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.0),
@@ -67,30 +69,40 @@ class ProductWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text('Reviews: (${product.ratingsAverage ?? 0})'),
-                  const Icon(Icons.star, color: Colors.orange),
-                  Container(
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context).primaryColor),
-                    child: IconButton(
-                      onPressed: () {
-                        CatalogViewModel.get(context)
-                            .addToCart(productId: product.id ?? "");
-                      },
-                      icon: Icon(
-                        Icons.add,
-                        size: 24.sp,
-                        color: Colors.white,
-                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      '(${product.ratingsAverage ?? 0})',
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
-              ),
+                    const Icon(Icons.star, color: Colors.orange),
+                  ],
+                ),
+                Row(
+                  children: [
+                    if (isAddedEnabled)
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            shape: BoxShape.circle),
+                        child: GestureDetector(
+                          onTap: () {
+                            CatalogViewModel.get(context)
+                                .addToCart(productId: product.id ?? "");
+                          },
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 32.sp,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ],
             )
           ],
         ),

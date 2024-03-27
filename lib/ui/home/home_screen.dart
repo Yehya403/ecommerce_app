@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../di/di.dart';
 import '../common/custom_search_app_bar.dart';
+import '../products_catalog/catalog_view_model.dart';
 import 'home_screen_view_model.dart';
 import 'home_tab/home_tab.dart';
 
@@ -20,6 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var viewModel = getIt<HomeViewModel>();
+  final catalogViewModel = getIt<CatalogViewModel>();
+
   int selectedIndex = 0;
   Widget bodyWidget = const HomeTab();
 
@@ -56,7 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: Colors.white,
-            title: CustomSearchAppBar(),
+            title: CustomSearchAppBar(
+              isCartVisible: false,
+              catalogViewModel: catalogViewModel,
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: selectedIndex,

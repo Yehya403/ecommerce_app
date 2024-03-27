@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 title: 'Error', posActionName: 'ok');
           } else if (state is LoginSuccessState) {
             DialogUtils.hideLoading(context);
-            DialogUtils.showMessage(context, state.authResult.user?.name ?? "",
+            DialogUtils.showMessage(context, 'Login Successfully',
                 title: 'Success', posActionName: 'ok', posAction: () {
               Navigator.pushReplacementNamed(context, HomeScreen.routeName);
             });
@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 36.h),
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 64.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -129,12 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Forgot Password',
                           style: Theme.of(context)
                               .textTheme
-                              .titleMedium!
-                              .copyWith(color: AppColors.whiteColor),
+                              .titleSmall
+                              ?.copyWith(color: AppColors.whiteColor),
                           textAlign: TextAlign.end,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 35.h),
+                          padding: EdgeInsets.only(top: 32.h),
                           child: ElevatedButton(
                             onPressed: () {
                               viewModel.login();
@@ -161,14 +161,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 30.h),
+                        Container(
+                          padding: EdgeInsets.only(top: 24.h),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Don’t have an account? ',
-                                style: Theme.of(context).textTheme.titleMedium,
+                              Text('Don’t have an account? ',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(color: AppColors.whiteColor)),
+                              SizedBox(
+                                width: 4.w,
                               ),
                               InkWell(
                                 onTap: () {
@@ -179,11 +183,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                             const RegisterScreen(),
                                       ));
                                 },
-                                child: Text(
-                                  'Create Account',
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                ),
+                                child: Text('Create Account',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall
+                                        ?.copyWith(
+                                            color: AppColors.whiteColor)),
                               )
                             ],
                           ),

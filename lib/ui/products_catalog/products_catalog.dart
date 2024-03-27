@@ -4,9 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../di/di.dart';
 import '../../domain/model/Category.dart';
 import '../common/ProductWidget.dart';
-import 'catalog_states.dart';
 import '../common/custom_search_app_bar.dart';
-
+import 'catalog_states.dart';
 import 'catalog_view_model.dart';
 
 class ProductsCatalog extends StatefulWidget {
@@ -48,51 +47,7 @@ class _ProductsCatalogState extends State<ProductsCatalog> {
                 return Scaffold(
                   appBar: AppBar(
                     backgroundColor: Colors.white,
-                    title: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: 'Search...',
-                              prefixIcon: const Icon(Icons.search, size: 32),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 8),
-                              // Adjust padding
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: const BorderSide(
-                                    color: Colors.white, width: 2.0),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor,
-                                    width: 2.0), // Highlight on focus
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Badge(
-                          label: Text(
-                            viewModel.numOfCartItems.toString() ?? "",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(Icons.shopping_cart_sharp),
-                            color: Theme.of(context).primaryColor,
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
+                    title: CustomSearchAppBar(catalogViewModel: viewModel),
                   ),
                   body: Padding(
                     padding:
@@ -100,13 +55,15 @@ class _ProductsCatalogState extends State<ProductsCatalog> {
                     child: GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 8 / 10,
+                        childAspectRatio: 8 / 11,
                         mainAxisSpacing: 16,
                         crossAxisSpacing: 16,
                         crossAxisCount: 2,
                       ),
                       itemBuilder: (context, index) {
-                        return ProductWidget(productsState.products![index]);
+                        return ProductWidget(
+                            isAddedEnabled: true,
+                            product: productsState.products![index]);
                       },
                       itemCount: productsState.products?.length ?? 0,
                     ),
