@@ -2,6 +2,7 @@ import 'package:ecommerce_app/domain/model/Category.dart';
 import 'package:ecommerce_app/ui/common/ProductWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../di/di.dart';
 import '../../../domain/model/Brand.dart';
@@ -59,13 +60,13 @@ Widget buildSuccessWidget(List<Category> categories, List<Brand> brands,
     List<Product> mostSellingProducts, BuildContext context) {
   return Scaffold(
     body: Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: SizedBox.fromSize(
               size: Size.fromHeight(
-                MediaQuery.of(context).size.height * 0.35,
+                MediaQuery.of(context).size.height * 0.34,
               ),
               child: Column(
                 children: [
@@ -76,6 +77,7 @@ Widget buildSuccessWidget(List<Category> categories, List<Brand> brands,
                       Text('See all'),
                     ],
                   ),
+                  SizedBox(height: 8.h),
                   Expanded(
                     child: GridView.builder(
                       scrollDirection: Axis.horizontal,
@@ -94,14 +96,12 @@ Widget buildSuccessWidget(List<Category> categories, List<Brand> brands,
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 16,
-            ),
+          SliverToBoxAdapter(
+            child: SizedBox(height: 8.h),
           ),
           SliverToBoxAdapter(
             child: SizedBox(
-              height: 200,
+              height: 160.h,
               width: double.infinity,
               child: Column(
                 children: [
@@ -112,6 +112,7 @@ Widget buildSuccessWidget(List<Category> categories, List<Brand> brands,
                       Text('See all'),
                     ],
                   ),
+                  SizedBox(height: 8.h),
                   Expanded(
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -122,11 +123,6 @@ Widget buildSuccessWidget(List<Category> categories, List<Brand> brands,
                   ),
                 ],
               ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 16,
             ),
           ),
           SliverToBoxAdapter(
@@ -142,11 +138,13 @@ Widget buildSuccessWidget(List<Category> categories, List<Brand> brands,
                       Text('See all'),
                     ],
                   ),
+                  SizedBox(height: 8.h),
                   Expanded(
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return ProductWidget(mostSellingProducts[index]);
+                        return ProductWidget(
+                            product: mostSellingProducts[index]);
                       },
                       itemCount: mostSellingProducts.length,
                       separatorBuilder: (BuildContext context, int index) =>

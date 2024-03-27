@@ -36,7 +36,11 @@ class HomeCategoryWidget extends StatelessWidget {
             width: 100.w,
             height: 100.h,
           ),
-          Text(category.name ?? "", maxLines: 1),
+          Text(
+            category.name ?? "",
+            maxLines: 1,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

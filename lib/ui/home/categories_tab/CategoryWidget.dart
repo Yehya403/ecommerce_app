@@ -17,37 +17,34 @@ class CategoryWidget extends StatelessWidget {
         Navigator.of(context)
             .pushNamed(ProductsCatalog.routeName, arguments: category);
       },
-      child: SizedBox(
-        width: 70.w,
-        height: 100.h,
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor.withOpacity(0.3),
-                    width: 2,
-                  ),
-                ),
-                child: CachedNetworkImage(
-                  imageUrl: category?.image ?? "",
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  width: 70.w,
-                  height: 70.h,
-                  fit: BoxFit.fill,
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).primaryColor.withOpacity(0.3),
+                  width: 2,
                 ),
               ),
+              child: CachedNetworkImage(
+                imageUrl: category?.image ?? "",
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                width: 100.w,
+                height: 100.h,
+                fit: BoxFit.fill,
+              ),
             ),
-            Text(
-              category?.name ?? "",
-              maxLines: 1,
-            ),
-          ],
-        ),
+          ),
+          Text(
+            category?.name ?? "",
+            maxLines: 1,
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }

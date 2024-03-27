@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../products_catalog/catalog_view_model.dart';
+
 class CustomSearchAppBar extends StatelessWidget {
-  const CustomSearchAppBar({super.key});
+  final bool isCartVisible;
+  final CatalogViewModel catalogViewModel;
+
+  const CustomSearchAppBar(
+      {super.key, this.isCartVisible = true, required this.catalogViewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +39,21 @@ class CustomSearchAppBar extends StatelessWidget {
         const SizedBox(
           width: 16,
         ),
-        IconButton(
-          icon: const Icon(Icons.shopping_cart_sharp),
-          color: Theme.of(context).primaryColor,
-          onPressed: () {},
-        ),
+        if (isCartVisible)
+          Badge(
+            label: Text(
+              catalogViewModel.numOfCartItems.toString() ?? "",
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart_sharp),
+              color: Theme.of(context).primaryColor,
+              onPressed: () {},
+            ),
+          ),
       ],
     );
   }

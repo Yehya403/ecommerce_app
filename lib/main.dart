@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:ecommerce_app/ui/app_theme.dart';
 import 'package:ecommerce_app/ui/auth/login/login_screen.dart';
 import 'package:ecommerce_app/ui/auth/register/register_screen.dart';
@@ -8,6 +7,7 @@ import 'package:ecommerce_app/ui/my_bloc_observer.dart';
 import 'package:ecommerce_app/ui/products_catalog/products_catalog.dart';
 import 'package:ecommerce_app/ui/utils/shared_preference_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'di/di.dart';

@@ -50,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 Padding(
                   padding:
-                      EdgeInsets.symmetric(vertical: 36.h, horizontal: 16.w),
+                      EdgeInsets.symmetric(vertical: 64.h, horizontal: 16.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -117,8 +117,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             TextFieldItem(
-                              fieldName: 'Confirmation Password',
-                              hintText: 'enter your confirmationPassword',
+                              fieldName: 'Confirm Password',
+                              hintText: 'enter your confirm password',
                               controller:
                                   viewModel.confirmationPasswordController,
                               validator: (value) {
@@ -163,7 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 35.h),
+                        padding: EdgeInsets.only(top: 16.h),
                         child: ElevatedButton(
                           onPressed: () {
                             viewModel.register();
@@ -190,6 +190,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 24.h,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.pushReplacementNamed(
@@ -198,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Text('Have an acccount ? Sign in',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium!
+                                .titleSmall!
                                 .copyWith(color: AppColors.whiteColor),
                             textAlign: TextAlign.center),
                       ),

@@ -12,13 +12,12 @@ class CatalogViewModel extends Cubit<CatalogState> {
   Category? category;
   AddToCartUseCase addToCartUseCase;
 
-  @factoryMethod
   CatalogViewModel(this.getProductsUseCase, this.addToCartUseCase)
       : super(ProductsLoadingState());
 
   int numOfCartItems = 0;
 
-  static get(context) {
+  static CatalogViewModel get(context) {
     return BlocProvider.of<CatalogViewModel>(context);
   }
 
@@ -40,7 +39,7 @@ class CatalogViewModel extends Cubit<CatalogState> {
     either.fold((error) {
       emit(AddToCartErrorState(errorMessage: error));
     }, (response) {
-      numOfCartItems = response.numOfCartItems?.toInt() ?? 0;
+      numOfCartItems = response.numOfCartItems!.toInt();
       print('numOfCartItems: $numOfCartItems');
       emit(AddToCartSuccessState(addToCartResponse: response));
       emit(ProductsSuccessState(products));
