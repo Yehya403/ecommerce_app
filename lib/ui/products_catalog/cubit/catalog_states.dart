@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/domain/failures.dart';
 
-import '../../domain/model/AddToCartResponse.dart';
-import '../../domain/model/Product.dart';
+import '../../../domain/model/AddToCart.dart';
+import '../../../domain/model/Product.dart';
 
 abstract class CatalogState {}
 
@@ -34,7 +34,7 @@ class AddToCartErrorState extends CatalogState {
 }
 
 class AddToCartSuccessState extends CatalogState {
-  AddToCartResponse addToCartResponse;
+  AddToCart addToCartResponse;
 
   AddToCartSuccessState({required this.addToCartResponse});
 }

@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../di/di.dart';
 import '../common/custom_search_app_bar.dart';
-import '../products_catalog/catalog_view_model.dart';
-import 'home_screen_view_model.dart';
+import '../products_catalog/cubit/catalog_view_model.dart';
+import 'cubit/home_screen_view_model.dart';
 import 'home_tab/home_tab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,12 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
             break;
         }
         return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.white,
-            title: CustomSearchAppBar(
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: CustomSearchAppBar(
+              isAutomaticallyImplyLeading: false,
               isCartVisible: false,
-              catalogViewModel: catalogViewModel,
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(

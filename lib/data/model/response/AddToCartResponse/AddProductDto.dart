@@ -1,4 +1,4 @@
-import '../../../../domain/model/AddProduct.dart';
+import '../../../../domain/model/AddToCart.dart';
 
 /// count : 1
 /// _id : "65fe7c82be8b52323583f1b1"

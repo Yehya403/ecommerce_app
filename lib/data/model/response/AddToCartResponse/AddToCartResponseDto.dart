@@ -1,4 +1,4 @@
-import '../../../../domain/model/AddToCartResponse.dart';
+import '../../../../domain/model/AddToCart.dart';
 import 'AddDataDto.dart';
 
 /// status : "success"
@@ -37,8 +37,8 @@ class AddToCartResponseDto {
     return map;
   }
 
-  AddToCartResponse toAddToCartResponse() {
-    return AddToCartResponse(
+  AddToCart toAddToCart() {
+    return AddToCart(
       status: status,
       message: message,
       numOfCartItems: numOfCartItems,

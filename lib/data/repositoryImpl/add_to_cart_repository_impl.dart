@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/failures.dart';
-import '../../domain/model/AddToCartResponse.dart';
+import '../../domain/model/AddToCart.dart';
 import '../../domain/repository_contract/AddToCartRepository.dart';
 import '../dataSourceContract/AddToCartDataSource.dart';
 
@@ -14,8 +14,7 @@ class AddToCartRepositoryImpl extends AddToCartRepository {
   AddToCartRepositoryImpl({required this.addToCartDataSource});
 
   @override
-  Future<Either<Failures, AddToCartResponse>> addToCart(
-      {required String productId}) {
+  Future<Either<Failures, AddToCart>> addToCart({required String productId}) {
     return addToCartDataSource.addToCart(productId: productId);
   }
 }

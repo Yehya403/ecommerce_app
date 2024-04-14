@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/domain/failures.dart';
-import 'package:ecommerce_app/domain/model/AddToCartResponse.dart';
+
+import '../model/AddToCart.dart';
 
 abstract class AddToCartRepository {
-  Future<Either<Failures, AddToCartResponse>> addToCart(
-      {required String productId});
+  Future<Either<Failures, AddToCart>> addToCart({required String productId});
 }

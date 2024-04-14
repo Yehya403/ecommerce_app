@@ -2,8 +2,8 @@ import 'package:ecommerce_app/domain/usecase/add_to_cart_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../domain/model/Category.dart';
-import '../../domain/usecase/GetProductsUseCase.dart';
+import '../../../domain/model/Category.dart';
+import '../../../domain/usecase/GetProductsUseCase.dart';
 import 'catalog_states.dart';
 
 @injectable
