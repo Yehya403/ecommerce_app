@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/ui/app_theme.dart';
 import 'package:ecommerce_app/ui/auth/login/login_screen.dart';
 import 'package:ecommerce_app/ui/auth/register/register_screen.dart';
+import 'package:ecommerce_app/ui/cart/cart_screen.dart';
 import 'package:ecommerce_app/ui/home/home_screen.dart';
 import 'package:ecommerce_app/ui/home/home_tab/home_tab.dart';
 import 'package:ecommerce_app/ui/my_bloc_observer.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
           RegisterScreen.routeName: (context) => const RegisterScreen(),
           HomeTab.routeName: (context) => const HomeTab(),
           ProductsCatalog.routeName: (context) => const ProductsCatalog(),
+          CartScreen.routeName: (context) => CartScreen(),
         },
       ),
     );

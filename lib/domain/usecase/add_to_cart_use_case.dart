@@ -3,7 +3,7 @@ import 'package:ecommerce_app/domain/repository_contract/AddToCartRepository.dar
 import 'package:injectable/injectable.dart';
 
 import '../failures.dart';
-import '../model/AddToCartResponse.dart';
+import '../model/AddToCart.dart';
 
 @injectable
 class AddToCartUseCase {
@@ -12,7 +12,7 @@ class AddToCartUseCase {
   @factoryMethod
   AddToCartUseCase(this.addToCartRepository);
 
-  Future<Either<Failures, AddToCartResponse>> invoke(
+  Future<Either<Failures, AddToCart>> invoke(
       {required String productId}) async {
     return await addToCartRepository.addToCart(productId: productId);
   }

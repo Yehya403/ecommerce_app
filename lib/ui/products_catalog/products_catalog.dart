@@ -5,8 +5,8 @@ import '../../di/di.dart';
 import '../../domain/model/Category.dart';
 import '../common/ProductWidget.dart';
 import '../common/custom_search_app_bar.dart';
-import 'catalog_states.dart';
-import 'catalog_view_model.dart';
+import 'cubit/catalog_states.dart';
+import 'cubit/catalog_view_model.dart';
 
 class ProductsCatalog extends StatefulWidget {
   const ProductsCatalog({super.key});
@@ -45,9 +45,9 @@ class _ProductsCatalogState extends State<ProductsCatalog> {
               case ProductsSuccessState:
                 final productsState = state as ProductsSuccessState;
                 return Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: Colors.white,
-                    title: CustomSearchAppBar(catalogViewModel: viewModel),
+                  appBar: PreferredSize(
+                    preferredSize: const Size.fromHeight(kToolbarHeight),
+                    child: CustomSearchAppBar(catalogViewModel: viewModel),
                   ),
                   body: Padding(
                     padding:

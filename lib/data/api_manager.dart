@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/data/api_constants.dart';
-import 'package:ecommerce_app/data/model/response/cartResponse/AddToCartResponseDto.dart';
 import 'package:ecommerce_app/domain/failures.dart';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http/intercepted_client.dart';
@@ -12,9 +11,10 @@ import 'package:injectable/injectable.dart';
 import '../domain/repository_contract/ProductsRepo.dart';
 import '../ui/utils/shared_preference_utils.dart';
 import 'LoggingInterceptor.dart';
-
 import 'model/request/loginRequest/LoginRequest.dart';
 import 'model/request/registerRequest/RegisterRequest.dart';
+import 'model/response/AddToCartResponse/AddToCartResponseDto.dart';
+import 'model/response/CartResponseDto/CartResponseDto.dart';
 import 'model/response/brandsResponse/BrandsResponse.dart';
 import 'model/response/categoryResponse/CategoriesResponse.dart';
 import 'model/response/loginResponse/LoginResponse.dart';
@@ -143,6 +143,86 @@ class ApiManager {
         return Left(ServerError(errorMessage: addToCartResponse.message));
       } else {
         return Left(ServerError(errorMessage: addToCartResponse.message));
+      }
+    } else {
+      return Left(
+          NetworkError(errorMessage: 'Please check your internet connection'));
+    }
+  }
+
+  Future<Either<Failures, CartResponseDto>> getCart() async {
+    Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.addToCartApi);
+    final ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      var token = SharedPreferenceUtils.getData(key: 'token');
+      // I am connected to a mobile network or wifi.
+      var response =
+          await client.get(url, headers: {'token': token.toString()});
+      var getCartResponse = CartResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(getCartResponse);
+      } else if (response.statusCode == 401) {
+        return Left(ServerError(errorMessage: getCartResponse.message));
+      } else {
+        return Left(ServerError(errorMessage: getCartResponse.message));
+      }
+    } else {
+      return Left(
+          NetworkError(errorMessage: 'Please check your internet connection'));
+    }
+  }
+
+  Future<Either<Failures, CartResponseDto>> removeFromCart(
+      {required String productId}) async {
+    Uri url = Uri.https(
+        ApiConstants.baseUrl, '${ApiConstants.addToCartApi}/$productId');
+    final ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      var token = SharedPreferenceUtils.getData(key: 'token');
+      // I am connected to a mobile network or wifi.
+      var response =
+          await client.delete(url, headers: {'token': token.toString()});
+      var removeFromCartResponse =
+          CartResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(removeFromCartResponse);
+      } else if (response.statusCode == 401) {
+        return Left(ServerError(errorMessage: removeFromCartResponse.message));
+      } else {
+        return Left(ServerError(errorMessage: removeFromCartResponse.message));
+      }
+    } else {
+      return Left(
+          NetworkError(errorMessage: 'Please check your internet connection'));
+    }
+  }
+
+  Future<Either<Failures, CartResponseDto>> updateCountInCart(
+      {required String productId, required int count}) async {
+    Uri url = Uri.https(
+        ApiConstants.baseUrl, '${ApiConstants.addToCartApi}/$productId');
+    final ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      var token = SharedPreferenceUtils.getData(key: 'token');
+      // I am connected to a mobile network or wifi.
+      var response = await client.put(url,
+          body: {'count': '$count'}, headers: {'token': token.toString()});
+      var updateCountInCartResponse =
+          CartResponseDto.fromJson(jsonDecode(response.body));
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return Right(updateCountInCartResponse);
+      } else if (response.statusCode == 401) {
+        return Left(
+            ServerError(errorMessage: updateCountInCartResponse.message));
+      } else {
+        return Left(
+            ServerError(errorMessage: updateCountInCartResponse.message));
       }
     } else {
       return Left(

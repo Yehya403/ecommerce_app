@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce_app/ui/products_catalog/catalog_view_model.dart';
+import 'package:ecommerce_app/ui/products_catalog/cubit/catalog_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
